@@ -4,6 +4,7 @@ var baseConfig = require('./webpack.base');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
 
 let config = Object.assign({}, baseConfig, {
   output: {
@@ -12,11 +13,6 @@ let config = Object.assign({}, baseConfig, {
     chunkFilename: '[name].[hash].js'
   },
   devtool: 'source-map'
-});
-
-config.module.loaders.push({
-  test: /\.styl$/,
-  loader: ExtractTextPlugin.extract('style', 'css?sourceMap|stylus')
 });
 
 config.plugins.push(

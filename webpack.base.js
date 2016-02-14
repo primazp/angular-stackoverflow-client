@@ -1,6 +1,6 @@
 'use strict';
 
-var poststylus = require('poststylus');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 /**
  * Config
@@ -44,6 +44,16 @@ module.exports = {
   module: {
     preLoaders: [],
     loaders: [{
+      test: /\.less$/,
+      // Reference: https://github.com/webpack/extract-text-webpack-plugin
+      // Extract css files in production builds
+      //
+      // Reference: https://github.com/jtangelder/sass-loader.git
+      loader: ExtractTextPlugin.extract(
+        'style',
+        'css?sourceMap!autoprefixer?browsers=last 2 versions!less?sourceMap'
+      )
+    }, {
       // JS LOADER
       // Reference: https://github.com/babel/babel-loader
       // Transpile .js files using babel-loader
@@ -61,17 +71,18 @@ module.exports = {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader: 'file'
     }, {
+      // JADE LOADER
+      // Reference: https://github.com/webpack/jade-loader
+      // Allow loading jade through js
+      test: /\.jade$/,
+      loader: 'jade'
+    }, {
       // HTML LOADER
       // Reference: https://github.com/webpack/raw-loader
       // Allow loading html through js
       test: /\.html$/,
       loader: 'raw'
     }]
-  },
-  stylus: {
-    use: [
-      poststylus([ 'autoprefixer' ])
-    ]
   },
 
   /**
@@ -81,5 +92,7 @@ module.exports = {
    */
    devtool: 'eval',
 
-   plugins: []
+   plugins: [],
+
+   resolves: ['', '.js', '.less', '.jade']
 };

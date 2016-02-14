@@ -1,11 +1,11 @@
-import template from './search.html';
+import template from './search.jade';
 import controller from './search.controller';
-import './search.styl';
+import './search.less';
 
 let searchComponent = {
   restrict: 'E',
   bindings: {},
-  template,
+  template: template(),
   controller,
   controllerAs: 'vm'
 };

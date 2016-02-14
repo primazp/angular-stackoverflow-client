@@ -1,0 +1,53 @@
+.row.results
+  .col-md-8.query_results
+    .head.text-center
+      uib-pagination.pagination-sm(
+        boundary-links='vm.pagination.boundaryLinks'
+        total-items='vm.pagination.total'
+        ng-model='vm.pagination.page'
+        items-per-page='vm.pagination.pagesize'
+        previous-text='‹'
+        next-text='›'
+        first-text='«'
+        last-text='»'
+        ng-change='vm.loadResults()'
+        max-size='vm.pagination.maxSize'
+      )
+    .table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th Author
+            th Topic
+            th Answers
+            th Tags
+        tbody
+          tr.fx-fade-down.fx-speed-500.fx-trigger.fx-easing-cubic(ng-repeat='question in vm.questions')
+            td
+              a(href='', ng-click='queryAuthorQuestions(question.owner.user_id)') {{::question.owner.display_name}}
+            td.cut-text.title
+              a(ui-sref='question({id: question.id})' title="{{::question.title}}") {{::question.title}}
+            td
+              a(ui-sref='question({id: question.id})') {{::question.answer_count}}
+            td
+              span.badge.tag(ng-repeat='tag in question.tags', ng-click='queryTagQuestions()')
+                | {{::tag}}
+  .col-md-4
+    .head
+      | Most popupar questions from 
+      span.tagged {{::vm.questions[0].owner.display_name}}
+    table.table.table-hover.details.fx-bounce-right.fx-speed-500.fx-trigger.fx-easing-cubic
+      thead
+        tr
+          th Topic
+          th Answers
+          th Tags
+      tbody
+        tr(ng-repeat='question in vm.questions')
+          td.cut-text.title
+            a(ui-sref='question({id: question.question_id})' title="{{::question.title}}") {{::question.title}}
+          td
+            a(ui-sref='question({id: question.question_id})') {{::question.answer_count}}
+          td
+            span.badge.tag(ng-repeat='tag in question.tags', ng-click='queryTagQuestions(tag)')
+              | {{::tag}}

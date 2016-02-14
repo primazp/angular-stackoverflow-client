@@ -2,7 +2,6 @@
 
 var baseConfig = require('./webpack.base');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
@@ -20,10 +19,7 @@ config.module.preLoaders.push({
   loader: 'isparta-instrumenter'
 });
 
-config.module.loaders.push({
-  test: /\.styl$/,
-  loader: 'null'
-});
+config.module.loaders[0].loader = 'null'; // do not load styles in tests
 
 config.plugins.push(
   new ExtractTextPlugin('[name].css', { disable: true })

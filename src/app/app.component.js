@@ -1,7 +1,7 @@
-import template from './app.html';
+import template from './app.jade';
 
 let appComponent = {
-  template,
+  template: template(),
   restrict: 'E'
 };
 

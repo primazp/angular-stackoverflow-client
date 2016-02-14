@@ -1,37 +1,36 @@
 import SearchModule from './search'
 import SearchController from './search.controller';
 import SearchComponent from './search.component';
-import SearchTemplate from './search.html';
+import SearchTemplate from './search.jade';
 
 describe('Search', () => {
-  let $rootScope, $state, controller;
+  let controller;
+  let fakeState = { go() {} }
 
   beforeEach(window.module(SearchModule.name));
-  beforeEach(inject((_$rootScope_, _$state_) => {
-    $rootScope = _$rootScope_;
-    $state = _$state_;
-    controller = new SearchController($state);
+  beforeEach(inject(() => {
+    controller = new SearchController(fakeState);
   }));
 
   describe('Controller', () => {
     describe('getResult()', () => {
       beforeEach(() => {
-        spyOn($state, 'go');
+        spyOn(fakeState, 'go');
       });
 
       describe('when query string is absent', () => {
         it('returns', () => {
           controller.getResult();
-          expect($state.go).not.toHaveBeenCalled();
+          expect(fakeState.go).not.toHaveBeenCalled();
         });
       });
 
       describe('when query string is present', () => {
-        it('returns', () => {
+        it('navigates to results', () => {
           let query = 'lorem ipsum';
           controller.query = query;
           controller.getResult();
-          expect($state.go).toHaveBeenCalledWith('result', { query });
+          expect(fakeState.go).toHaveBeenCalledWith('result', { query });
         });
       });
     });

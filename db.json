@@ -1,5 +1,5 @@
 {
-  "searchadvanced": {
+  "search/advanced": {
     "items":[
       {
         "tags":[
@@ -771,6 +771,8 @@
     ],
     "has_more":true,
     "quota_max":300,
-    "quota_remaining":279
+    "quota_remaining":279,
+    "page_size": 10,
+    "total": 908857
   }
 }
