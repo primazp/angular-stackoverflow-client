@@ -1,0 +1,26 @@
+#question
+  .container(ng-if='vm.question && vm.answers')
+    .page-header
+      .h3
+        | {{::vm.question.title}}
+        .small
+          a(ng-href='{{::vm.question.link}}') {{::vm.question.link}}
+    post(post='vm.question' owner='true')
+    h2.answers-count
+      ng-pluralize(count="vm.answers.length" when="{'one': '{} answer', 'many': '{} answers', 'other': '{} answers'}")
+    .text-center(ng-if='vm.answers.length < vm.pagination.total')
+        uib-pagination.pagination-sm(
+          boundary-links='vm.pagination.boundaryLinks'
+          total-items='vm.pagination.total'
+          ng-model='vm.pagination.page'
+          items-per-page='vm.pagination.pagesize'
+          previous-text='‹'
+          next-text='›'
+          first-text='«'
+          last-text='»'
+          ng-change='vm.loadResults()'
+          max-size='vm.pagination.maxSize'
+        )
+    div(ng-repeat='answer in ::vm.answers')
+      post(post='answer')
+    div(style='color: #fff;') L

@@ -16,7 +16,20 @@ const DEFAULT_SEARCH_OPTIONS = {
   notagged: true,
   page: 1,
   pagesize: 10,
-  filter: '!9YdnSPu8f' // defaults + page, pagesize, total
+  filter: '!9YdnSPu8f', // defaults + page, pagesize, total,
+  SITE
+};
+const DEFAULT_ANSWERS_OPTIONS = {
+  order: 'desc',
+  sort: 'votes',
+  /**
+  * defaults + comments, comments body, answers body,
+  * pagesize, page, total
+  */
+  filter: '!3yXvhCikrFf()L8OD',
+  pagesize: 10,
+  page: 1,
+  SITE
 };
 
 let apiServiceModule = angular.module('api.search', [ ngResource ])
@@ -26,12 +39,15 @@ let apiServiceModule = angular.module('api.search', [ ngResource ])
   const api = $resource('', {}, {
     search: { url: API_URL + 'search/advanced' },
     questions: { url: API_URL + 'questions/:id' },
+    questionAnswers: { url: API_URL + 'questions/:id/answers' },
     questionsByUser: { url: API_URL + 'users/:id/questions' }
   });
 
   return {
     search(query, options = {}) {
-      let params = Object.assign({}, DEFAULT_SEARCH_OPTIONS, options, { q: query, SITE });
+      let params = Object.assign(
+        {}, DEFAULT_SEARCH_OPTIONS, options, { q: query }
+      );
       return api.search(params);
     },
     topByTag(tagged) {
@@ -41,6 +57,14 @@ let apiServiceModule = angular.module('api.search', [ ngResource ])
     topByAuthor(id) {
       let params = Object.assign({ id }, TOP_PARAMS);
       return api.questionsByUser(params);
+    },
+    question(id) {
+      let params = { filter: '!9YdnSIN18', id, SITE };
+      return api.questions(params);
+    },
+    questionAnswers(id, options) {
+      let params = Object.assign({}, DEFAULT_ANSWERS_OPTIONS, options, { id });
+      return api.questionAnswers(params);
     }
   }
 });

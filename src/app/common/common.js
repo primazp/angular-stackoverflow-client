@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ApiService from './api/api.search';
+import ApiService from './api/api';
 
 let commonModule = angular.module('app.common', [
   ApiService.name

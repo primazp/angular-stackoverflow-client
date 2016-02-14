@@ -1,0 +1,5 @@
+.comment
+  span.score(title="Score") {{::vm.content.score}}
+  span(ng-bind-html='::vm.getTrusted(vm.content.body)')
+  =' - '
+  a(ng-href='{{::vm.content.owner.link}}') {{::vm.content.owner.display_name}}

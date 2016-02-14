@@ -27,7 +27,7 @@
                 a(href='', ng-click='vm.queryPopularQuestions("user", question.owner)')
                   | {{::question.owner.display_name}}
               td
-                a(ui-sref='question({id: question.id})' title="{{::question.title}}") {{::question.title}}
+                a(ui-sref='question({id: question.question_id})' title="{{::question.title}}") {{::question.title}}
                 .badge.tag(
                   ng-repeat='tag in question.tags' 
                   ng-click='vm.queryPopularQuestions("tag", tag)'
@@ -35,6 +35,6 @@
                 )
                   | {{::tag}}
               td.text-center
-                a(ui-sref='question({id: question.id})') {{::question.answer_count}}
+                a(ui-sref='question({id: question.question_id})') {{::question.answer_count}}
     .col-md-4.col-sm-6.fx-fade-right.fx-dur-300.fx-speed-300.fx-ease-none(ng-if='vm.selected')
       result-details(selected='vm.selected')
