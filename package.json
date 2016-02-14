@@ -6,17 +6,16 @@
     "build": "webpack --config webpack.build.js --bail",
     "dev": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "karma start",
-    "test:live": "karma start --auto-watch --no-single-run",
-    "json": "json-server --watch db.json"
+    "test:live": "karma start --auto-watch --no-single-run"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/primazp/angular-stackoverflow-client"
   },
   "author": "Slava K",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/primazp/angular-stackoverflow-client/issues"
   },
   "homepage": "",
   "dependencies": {

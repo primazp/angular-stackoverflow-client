@@ -1,6 +1,7 @@
 'use strict';
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
 
 /**
  * Config
@@ -20,7 +21,7 @@ module.exports = {
 
   output: {
     // Absolute output directory
-    path: __dirname + '/public',
+    path: path.resolve(__dirname, 'public'),
 
     // Output path from the view of the page
     // Uses webpack-dev-server in development

@@ -8,6 +8,7 @@ var path = require('path');
 
 let config = Object.assign({}, baseConfig, {
   output: {
+    path: path.resolve(__dirname, 'build'),
     publicPath: '/',
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js'
@@ -33,7 +34,15 @@ config.plugins.push(
 
   // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
   // Minify all javascript, switch loaders to minimizing mode
-  new webpack.optimize.UglifyJsPlugin()
+  new webpack.optimize.UglifyJsPlugin({
+    mangle: {
+      // You can specify all variables that should not be mangled.
+      // For example if your vendor dependency doesn't use modules
+      // and relies on global variables. Most of angular modules relies on
+      // angular global variable, so we should keep it unchanged
+      except: ['angular']
+    }
+  })
 )
 
 module.exports = config;

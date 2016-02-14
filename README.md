@@ -10,7 +10,7 @@ All scripts are run with `npm run [script]`, for example: `npm run dev`.
 ## Installation and Run
 
 ```
-git clone repo-url
+git clone https://github.com/primazp/angular-stackoverflow-client.git
 cd angular-stackoverflow-client
 npm i
 npm i -g webpack webpack-dev-server
