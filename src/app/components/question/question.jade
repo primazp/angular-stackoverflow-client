@@ -1,12 +1,13 @@
 #question
-  .container(ng-if='vm.question && vm.answers')
+  preloader(ng-show='!vm.question')
+  .container(ng-if='vm.question')
     .page-header
       .h3
         | {{::vm.question.title}}
         .small
           a(ng-href='{{::vm.question.link}}') {{::vm.question.link}}
     post(post='vm.question' owner='true')
-    h2.answers-count
+    h2.divider
       ng-pluralize(count="vm.answers.length" when="{'one': '{} answer', 'many': '{} answers', 'other': '{} answers'}")
     .text-center(ng-if='vm.answers.length < vm.pagination.total')
         uib-pagination.pagination-sm(
@@ -21,6 +22,7 @@
           ng-change='vm.loadResults()'
           max-size='vm.pagination.maxSize'
         )
-    div(ng-repeat='answer in ::vm.answers')
-      post(post='answer')
+    preloader(ng-show='!vm.answers')    
+    div(ng-repeat='answer in ::vm.answers' ng-if='vm.answers')
+      post.mt20(post='answer')
     div(style='color: #fff;') L

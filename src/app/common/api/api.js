@@ -1,7 +1,7 @@
 import angular from 'angular';
 import ngResource from 'angular-resource';
 
-const API_URL = 'http://localhost:3000/'; // http://api.stackexchange.com/2.2/
+const API_URL = 'http://api.stackexchange.com/2.2/';
 const SITE = 'stackoverflow';
 const TOP_PARAMS = {
   page: 1,

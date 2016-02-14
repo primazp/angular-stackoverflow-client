@@ -6,6 +6,7 @@ import pagination from 'angular-ui-bootstrap/src/pagination/pagination';
 import questionComponent from './question.component';
 import PostModule from './post/post';
 import CommentModule from './post/post';
+import Preloader from '../preloader/preloader';
 
 let questionModule = angular.module('question', [
   uiRouter,
@@ -13,7 +14,8 @@ let questionModule = angular.module('question', [
   'ui.bootstrap.paging',
   'ui.bootstrap.pagination',
   PostModule.name,
-  CommentModule.name
+  CommentModule.name,
+  Preloader.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {
@@ -22,7 +24,7 @@ let questionModule = angular.module('question', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('questions', {
+    .state('question', {
       url: '/questions/:id',
       template: '<question></question>'
     });

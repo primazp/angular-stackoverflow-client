@@ -8,7 +8,7 @@ class QuestionController {
     this.$sce = $sce;
     this.pagination = {
       boundaryLinks: true,
-      pagesize: 10,
+      pagesize: 30,
       maxSize: 10,
       page: 1
     };
@@ -28,7 +28,7 @@ class QuestionController {
     let { page, pagesize } = this.pagination;
     let options = { page, pagesize };
 
-    this.apiService.questionAnswers(undefined, options)
+    this.apiService.questionAnswers(this.questionId, options)
     .$promise.then((response) => {
       this.answers = response.items;
       this.pagination.total = response.total;

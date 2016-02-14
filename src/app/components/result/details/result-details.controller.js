@@ -10,9 +10,11 @@ class ResultDetailsController {
   }
 
   loadDetails() {
+    this.isLoaded = false;
     let action = this.selected.type == 'tag' ? 'topByTag' : 'topByAuthor';
     this.apiService[action](this.selected.value).$promise.then((response) => {
       this.questions = response.items;
+      this.isLoaded = true;
     });
   }
 

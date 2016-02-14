@@ -9,7 +9,9 @@
       span.tagged {{vm.selected.name}}
       =' '
       | questions
-  table.table.table-hover.details
+  .preloader-wrapper(ng-show='!vm.isLoaded')
+    preloader
+  table.table.table-hover.details(ng-show='vm.isLoaded')
     thead
       tr
         th(ng-if='vm.selected.type == "tag"') Author

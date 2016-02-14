@@ -1,19 +1,38 @@
 .results-container
-  .row.results
+  preloader(ng-show='!vm.pageLoaded')
+  .row.results(ng-if='vm.pageLoaded')
     .query_results(ng-class="{'col-md-8 col-sm-6': vm.selected, 'col-md-12 col-sm-12': !vm.selected}")
-      .head.text-center
-        uib-pagination.pagination-sm(
-          boundary-links='vm.pagination.boundaryLinks'
-          total-items='vm.pagination.total'
-          ng-model='vm.pagination.page'
-          items-per-page='vm.pagination.pagesize'
-          previous-text='‹'
-          next-text='›'
-          first-text='«'
-          last-text='»'
-          ng-change='vm.loadResults()'
-          max-size='vm.pagination.maxSize'
-        )
+      .head(ng-if='vm.questions.length < vm.settings.total')
+        .form-inline
+          .form-group
+            label(for='sorting') Sort by:
+            select.form-control.input-sm(
+              id='sorting' 
+              ng-model='vm.settings.sort'
+              ng-options='sort for sort in vm.sorts'
+              ng-change='vm.updateSettings()'
+            )
+          .form-group
+            label(for='ordering') Order by:
+            select.form-control.input-sm(
+              id='soorderingrting' 
+              ng-model='vm.settings.order'
+              ng-options='order for order in vm.orders'
+              ng-change='vm.updateSettings()'
+            )
+        .text-center
+          uib-pagination.pagination-sm(
+            boundary-links='vm.settings.boundaryLinks'
+            total-items='vm.settings.total'
+            ng-model='vm.settings.page'
+            items-per-page='vm.settings.pagesize'
+            previous-text='‹'
+            next-text='›'
+            first-text='«'
+            last-text='»'
+            ng-change='vm.loadResults()'
+            max-size='vm.settings.maxSize'
+          )
       .table-responsive
         table.table.table-hover
           thead

@@ -4,7 +4,7 @@ describe('ApiService', () => {
 
   let $httpBackend, api;
 
-  const API_URL = 'http://localhost:3000/'; // http://api.stackexchange.com/2.2/
+  const API_URL = 'http://api.stackexchange.com/2.2/';
 
   beforeEach(window.module(apiServiceModule.name));
   beforeEach(inject((_$httpBackend_, ApiService) => {

@@ -7,25 +7,45 @@ class ResultController {
     this.query = $stateParams.query;
     this.apiService = ApiService;
     this.name = 'result';
-    this.pagination = {
+    this.settings = {
       boundaryLinks: true,
-      pagesize: 10,
+      pagesize: 30,
       maxSize: 10,
-      page: 1
-    }
+      page: 1,
+      sort: 'activity',
+      order: 'desc'
+    };
+    this.sorts = [
+      'activity',
+      'votes',
+      'creation',
+      'relevance'
+    ];
+    this.orders = [
+      'desc',
+      'asc'
+    ]
     this.loadResults();
   }
 
   loadResults() {
     if (!this.query || !this.query.length) return;
 
-    let { page, pagesize } = this.pagination;
-    let options = { page, pagesize };
+    let { page, pagesize, sort, order } = this.settings;
+    let options = { page, pagesize, sort, order };
+
+    this.pageLoaded = false;
 
     this.apiService.search(this.query, options).$promise.then((response) => {
       this.questions = response.items;
-      this.pagination.total = response.total;
+      this.settings.total = response.total;
+      this.pageLoaded = true;
     });
+  }
+
+  updateSettings() {
+    this.settings.page = 1;
+    this.loadResults();
   }
 
   queryPopularQuestions(type, object) {
