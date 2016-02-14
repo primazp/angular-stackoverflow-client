@@ -4,12 +4,14 @@ import template from 'angular-ui-bootstrap/template/pagination/pagination.html.j
 import paging from 'angular-ui-bootstrap/src/paging/paging';
 import pagination from 'angular-ui-bootstrap/src/pagination/pagination';
 import resultComponent from './result.component';
+import ResultDetails from './details/result-details';
 
 let resultModule = angular.module('result', [
   uiRouter,
   'uib/template/pagination/pagination.html',
   'ui.bootstrap.paging',
-  'ui.bootstrap.pagination'
+  'ui.bootstrap.pagination',
+  ResultDetails.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {

@@ -3,7 +3,7 @@ import ResultDetailsController from './result-details.controller';
 import ResultDetailsComponent from './result-details.component';
 import ResultDetailsTemplate from './result-details.jade';
 
-describe('Result', () => {
+describe('ResultDetails', () => {
   let controller, scope, fakeApiSearch;
 
   beforeEach(window.module(ResultDetailsModule.name));
@@ -45,6 +45,15 @@ describe('Result', () => {
           controller.loadDetails();
           expect(fakeApiSearch.topByAuthor).toHaveBeenCalledWith(123);
         });
+      });
+    });
+
+    describe('watch selected value', () => {
+      it('calls loadDetails on change', () => {
+        spyOn(controller, 'loadDetails');
+        controller.selected= { type: 'user', value: 123 };
+        scope.$digest();
+        expect(controller.loadDetails).toHaveBeenCalled();
       });
     });
   });

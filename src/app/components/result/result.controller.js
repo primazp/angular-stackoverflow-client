@@ -1,10 +1,12 @@
+import {selectItem} from './utils/select-item';
+
 class ResultController {
   constructor(ApiSearch, $state, $stateParams) {
     'ngInject';
     this.state = $state;
     this.query = $stateParams.query;
     this.apiSearch = ApiSearch;
-    this.name = 'search';
+    this.name = 'result';
     this.pagination = {
       boundaryLinks: true,
       pagesize: 10,
@@ -21,12 +23,13 @@ class ResultController {
     let options = { page, pagesize };
 
     this.apiSearch.search(this.query, options).$promise.then((response) => {
-      console.debug(1);
       this.questions = response.items;
       this.pagination.total = response.total;
-    }, (err) => {
-      console.debug(2);
     });
+  }
+
+  queryPopularQuestions(type, object) {
+    this.selected = selectItem(type, object);
   }
 }
 
