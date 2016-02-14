@@ -1,9 +1,9 @@
 import {selectItem} from '../utils/select-item';
 
 class ResultDetailsController {
-  constructor(ApiSearch, $scope) {
+  constructor(ApiService, $scope) {
     'ngInject';
-    this.apiSearch = ApiSearch;
+    this.apiService = ApiService;
     this.$scope = $scope;
     let vm = this;
     this.$scope.$watch('vm.selected.value', this.valueChanged());
@@ -11,7 +11,7 @@ class ResultDetailsController {
 
   loadDetails() {
     let action = this.selected.type == 'tag' ? 'topByTag' : 'topByAuthor';
-    this.apiSearch[action](this.selected.value).$promise.then((response) => {
+    this.apiService[action](this.selected.value).$promise.then((response) => {
       this.questions = response.items;
     });
   }

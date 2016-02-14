@@ -6,14 +6,14 @@ import ResultTemplate from './result.jade';
 describe('Result', () => {
   let controller;
   let fakeState = { go() {} };
-  let fakeApiSearch = { };
+  let fakeApiService = { };
 
   beforeEach(window.module(ResultModule.name));
   beforeEach(inject(($q) => {
-    fakeApiSearch.search = () => ({ $promise: $q.defer().promise });
+    fakeApiService.search = () => ({ $promise: $q.defer().promise });
 
     controller = new ResultController(
-      fakeApiSearch,
+      fakeApiService,
       fakeState,
       { query: '' }
     );
@@ -23,25 +23,25 @@ describe('Result', () => {
     describe('loadResults()', () => {
       describe('when query string is absent', () => {
         beforeEach(() => {
-          spyOn(fakeApiSearch, 'search');
+          spyOn(fakeApiService, 'search');
           controller.query = '';
         });
 
         it('returns', () => {
           controller.loadResults();
-          expect(fakeApiSearch.search).not.toHaveBeenCalled();
+          expect(fakeApiService.search).not.toHaveBeenCalled();
         });
       });
 
       describe('when query string is present', () => {
         beforeEach(() => {
-          spyOn(fakeApiSearch, 'search').and.callThrough();
+          spyOn(fakeApiService, 'search').and.callThrough();
           controller.query = 'lorem ipsum';
         });
 
         it('queries questions', () => {
           controller.loadResults();
-          expect(fakeApiSearch.search).toHaveBeenCalled();
+          expect(fakeApiService.search).toHaveBeenCalled();
         });
       });
     });

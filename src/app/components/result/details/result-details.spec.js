@@ -4,19 +4,19 @@ import ResultDetailsComponent from './result-details.component';
 import ResultDetailsTemplate from './result-details.jade';
 
 describe('ResultDetails', () => {
-  let controller, scope, fakeApiSearch;
+  let controller, scope, fakeApiService;
 
   beforeEach(window.module(ResultDetailsModule.name));
   beforeEach(inject(($q, $rootScope) => {
     let fakeQuery = () => ({ $promise: $q.defer().promise });
-    fakeApiSearch = {
+    fakeApiService = {
       topByTag: fakeQuery,
       topByAuthor: fakeQuery
     }
     scope = $rootScope.$new();
 
     controller = new ResultDetailsController(
-      fakeApiSearch,
+      fakeApiService,
       scope
     );
   }));
@@ -25,25 +25,25 @@ describe('ResultDetails', () => {
     describe('loadDetails()', () => {
       describe('when type is tag', () => {
         beforeEach(() => {
-          spyOn(fakeApiSearch, 'topByTag').and.callThrough();
+          spyOn(fakeApiService, 'topByTag').and.callThrough();
           controller.selected= { type: 'tag', value: 'c#' };
         });
 
         it('returns', () => {
           controller.loadDetails();
-          expect(fakeApiSearch.topByTag).toHaveBeenCalledWith('c#');
+          expect(fakeApiService.topByTag).toHaveBeenCalledWith('c#');
         });
       });
 
       describe('when query string is present', () => {
         beforeEach(() => {
-          spyOn(fakeApiSearch, 'topByAuthor').and.callThrough();
+          spyOn(fakeApiService, 'topByAuthor').and.callThrough();
           controller.selected= { type: 'user', value: 123 };
         });
 
         it('queries questions', () => {
           controller.loadDetails();
-          expect(fakeApiSearch.topByAuthor).toHaveBeenCalledWith(123);
+          expect(fakeApiService.topByAuthor).toHaveBeenCalledWith(123);
         });
       });
     });

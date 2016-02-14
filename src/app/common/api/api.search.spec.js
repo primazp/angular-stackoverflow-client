@@ -1,15 +1,15 @@
-import apiSearchModule from './api.search';
+import apiServiceModule from './api.search';
 
-describe('ApiSearch', () => {
+describe('ApiService', () => {
 
   let $httpBackend, api;
 
   const API_URL = 'http://localhost:3000/'; // http://api.stackexchange.com/2.2/
 
-  beforeEach(window.module(apiSearchModule.name));
-  beforeEach(inject((_$httpBackend_, ApiSearch) => {
+  beforeEach(window.module(apiServiceModule.name));
+  beforeEach(inject((_$httpBackend_, ApiService) => {
     $httpBackend = _$httpBackend_;
-    api = ApiSearch;
+    api = ApiService;
   }));
 
   describe('Factory', () => {

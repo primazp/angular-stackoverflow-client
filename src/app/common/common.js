@@ -1,8 +1,8 @@
 import angular from 'angular';
-import ApiSearch from './api/api.search';
+import ApiService from './api/api.search';
 
 let commonModule = angular.module('app.common', [
-  ApiSearch.name
+  ApiService.name
 ]);
 
 export default commonModule;

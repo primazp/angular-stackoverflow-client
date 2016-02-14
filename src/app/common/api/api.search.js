@@ -19,8 +19,8 @@ const DEFAULT_SEARCH_OPTIONS = {
   filter: '!9YdnSPu8f' // defaults + page, pagesize, total
 };
 
-let apiSearchModule = angular.module('api.search', [ ngResource ])
-.factory('ApiSearch', function ($resource) {
+let apiServiceModule = angular.module('api.search', [ ngResource ])
+.factory('ApiService', function ($resource) {
   'ngInject';
 
   const api = $resource('', {}, {
@@ -45,4 +45,4 @@ let apiSearchModule = angular.module('api.search', [ ngResource ])
   }
 });
 
-export default apiSearchModule;
+export default apiServiceModule;

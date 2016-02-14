@@ -1,11 +1,11 @@
 import {selectItem} from './utils/select-item';
 
 class ResultController {
-  constructor(ApiSearch, $state, $stateParams) {
+  constructor(ApiService, $state, $stateParams) {
     'ngInject';
     this.state = $state;
     this.query = $stateParams.query;
-    this.apiSearch = ApiSearch;
+    this.apiService = ApiService;
     this.name = 'result';
     this.pagination = {
       boundaryLinks: true,
@@ -22,7 +22,7 @@ class ResultController {
     let { page, pagesize } = this.pagination;
     let options = { page, pagesize };
 
-    this.apiSearch.search(this.query, options).$promise.then((response) => {
+    this.apiService.search(this.query, options).$promise.then((response) => {
       this.questions = response.items;
       this.pagination.total = response.total;
     });
