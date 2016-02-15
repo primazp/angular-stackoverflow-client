@@ -44,9 +44,10 @@
             tr(ng-repeat='question in vm.questions').fx-fade-normal.fx-speed-500.fx-ease-none
               td
                 a(href='', ng-click='vm.queryPopularQuestions("user", question.owner)')
-                  | {{::question.owner.display_name}}
+                  span(ng-bind-html='::vm.trustAsHtml(question.owner.display_name)')
               td
-                a(ui-sref='question({id: question.question_id})' title="{{::question.title}}") {{::question.title}}
+                a(ui-sref='question({id: question.question_id})' title="{{::question.title}}")
+                  span(ng-bind-html='::vm.trustAsHtml(question.title)')
                 .badge.tag(
                   ng-repeat='tag in question.tags' 
                   ng-click='vm.queryPopularQuestions("tag", tag)'

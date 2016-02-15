@@ -7,6 +7,7 @@ describe('Result', () => {
   let controller;
   let fakeState = { go() {} };
   let fakeApiService = { };
+  let fakeSce = { trustAsHtml() { } };
 
   beforeEach(window.module(ResultModule.name));
   beforeEach(inject(($q) => {
@@ -15,7 +16,8 @@ describe('Result', () => {
     controller = new ResultController(
       fakeApiService,
       fakeState,
-      { query: '' }
+      { query: '' },
+      fakeSce
     );
   }));
 

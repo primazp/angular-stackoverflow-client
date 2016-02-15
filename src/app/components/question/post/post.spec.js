@@ -18,7 +18,7 @@ describe('controller', () => {
   describe('getTrusted()', () => {
     it('calls sce', () => {
       let code = '<script>alert(1);</script>';
-      controller.getTrusted(code);
+      controller.trustAsHtml(code);
       expect(fakeSce.trustAsHtml).toHaveBeenCalledWith(code);
     });
   });

@@ -1,12 +1,13 @@
 import {selectItem} from '../utils/select-item';
 
 class ResultDetailsController {
-  constructor(ApiService, $scope) {
+  constructor(ApiService, $scope, $sce) {
     'ngInject';
     this.apiService = ApiService;
     this.$scope = $scope;
+    this.trustAsHtml = $sce.trustAsHtml;
     let vm = this;
-    this.$scope.$watch('vm.selected.value', this.valueChanged());
+    this.$scope.$watch('vm.selected.value', this.loadDetails.bind(this));
   }
 
   loadDetails() {
@@ -16,10 +17,6 @@ class ResultDetailsController {
       this.questions = response.items;
       this.isLoaded = true;
     });
-  }
-
-  valueChanged(newVal, oldVal) {
-    return () => { this.loadDetails() };
   }
 
   queryPopularQuestions(type, object) {

@@ -1,7 +1,7 @@
 import {selectItem} from './utils/select-item';
 
 class ResultController {
-  constructor(ApiService, $state, $stateParams) {
+  constructor(ApiService, $state, $stateParams, $sce) {
     'ngInject';
     this.state = $state;
     this.query = $stateParams.query;
@@ -24,7 +24,8 @@ class ResultController {
     this.orders = [
       'desc',
       'asc'
-    ]
+    ];
+    this.trustAsHtml = $sce.trustAsHtml;
     this.loadResults();
   }
 

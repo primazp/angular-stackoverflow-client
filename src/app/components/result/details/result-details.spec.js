@@ -5,6 +5,7 @@ import ResultDetailsTemplate from './result-details.jade';
 
 describe('ResultDetails', () => {
   let controller, scope, fakeApiService;
+  let fakeSce = { trustAsHtml() { } };
 
   beforeEach(window.module(ResultDetailsModule.name));
   beforeEach(inject(($q, $rootScope) => {
@@ -17,7 +18,8 @@ describe('ResultDetails', () => {
 
     controller = new ResultDetailsController(
       fakeApiService,
-      scope
+      scope,
+      fakeSce
     );
   }));
 

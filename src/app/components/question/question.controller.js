@@ -5,7 +5,7 @@ class QuestionController {
     this.apiService = ApiService;
     this.$state = $state;
     this.questionId = $stateParams.id;
-    this.$sce = $sce;
+    this.trustAsHtml = $sce.trustAsHtml;
     this.pagination = {
       boundaryLinks: true,
       pagesize: 30,

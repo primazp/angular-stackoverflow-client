@@ -2,7 +2,7 @@
   .head
     div(ng-if='vm.selected.type == "user"')
       | Most popupar questions from 
-      span.tagged {{vm.selected.name}}
+      span.tagged(ng-bind-html='vm.trustAsHtml(vm.selected.name)')
     div(ng-if='vm.selected.type == "tag"')
       | Most popupar
       =' ' 
@@ -20,9 +20,11 @@
     tbody
       tr(ng-repeat='question in vm.questions')
         td(ng-if='vm.selected.type == "tag"')
-          a(href='' ng-click='vm.queryPopularQuestions("user", question.owner)') {{::question.owner.display_name}}
+          a(href='' ng-click='vm.queryPopularQuestions("user", question.owner)')
+            span(ng-bind-html='::vm.trustAsHtml(question.owner.display_name)')
         td
-          a(ui-sref='question({id: question.question_id})' title="{{::question.title}}") {{::question.title}}
+          a(ui-sref='question({id: question.question_id})' title="{{::question.title}}")
+            span(ng-bind-html='::vm.trustAsHtml(question.title)')
           .badge.tag(ng-repeat='tag in question.tags' ng-click='vm.queryPopularQuestions("tag", tag)')
             | {{::tag}}
         td.text-center
